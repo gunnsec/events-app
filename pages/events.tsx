@@ -10,7 +10,7 @@ export default function Events(props: {events: {[key: string]: Event[]}}) {
             <Head>
                 <title>Events List | SEC</title>
                 <meta name="description" content="A list of all school events." />
-                <link rel="icon" href="/favicon.ico"/>
+                <link rel="icon" href={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/favicon.ico`} />
             </Head>
 
             <h1 className="text-xl font-semibold mb-4">List of all school events:</h1>
@@ -39,12 +39,11 @@ function EventMonth(props: {month: string, children: ReactNode}) {
 
 function EventCard(props: Event) {
     const [open, setOpen] = useState(false);
-    console.log(props.finalized)
 
     return (
         <>
             <div className="flex gap-3 rounded-lg cursor-pointer overflow-hidden border border-gray-300 hover:border-gray-500 transition duration-200" onClick={() => setOpen(true)}>
-                <img src={`${process.env.BASE_PATH || ''}/hoco.JPG`} className="w-24 object-cover" alt="hoco" />
+                <img src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/hoco.JPG`} className="w-24 object-cover" alt="hoco" />
                 <div className="p-4">
                     <h3 className="font-medium">
                         {props.name} – ({props.date}){props.finalized === 'FALSE' && <span className="text-red-600">*</span>}
@@ -81,7 +80,7 @@ function EventCard(props: Event) {
                                 {props.name}
                             </Dialog.Title>
 
-                            <img src={`${process.env.BASE_PATH || ''}/hoco.JPG`} className="mb-4" alt="hoco" />
+                            <img src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/hoco.JPG`} className="mb-4" alt="hoco" />
 
                             <Dialog.Description className="whitespace-pre-wrap">
                                 {props.longDesc}

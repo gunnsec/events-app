@@ -12,7 +12,7 @@ jobs:
           CLIENT_EMAIL: ${{ secrets.CLIENT_EMAIL }}
           PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
           SPREADSHEET_ID: ${{ secrets.EVENTS_APP_SPREADSHEET_ID }}
-          BASE_PATH: '/events-app' # TODO: ideally this would be deployed on a subdomain at root and there wouldn't be a need for this
+          NEXT_PUBLIC_BASE_PATH: '/events-app' # TODO: ideally this would be deployed on a subdomain at root and there wouldn't be a need for this
         run: npm ci && CI=false npm run build && npm run export
       - uses: peaceiris/actions-gh-pages@v3
         with:
