@@ -7,7 +7,7 @@ export default function Home() {
             <Head>
                 <title>Events App</title>
                 <meta name="description" content="An app for keeping track of SEC events." />
-                <link rel="icon" href="/favicon.ico"/>
+                <link rel="icon" href={`${process.env.BASE_PATH || ''}/favicon.ico`} />
             </Head>
 
             <main className="w-64 p-6 bg-white/80 rounded-lg">

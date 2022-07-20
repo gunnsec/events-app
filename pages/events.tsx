@@ -44,7 +44,7 @@ function EventCard(props: Event) {
     return (
         <>
             <div className="flex gap-3 rounded-lg cursor-pointer overflow-hidden border border-gray-300 hover:border-gray-500 transition duration-200" onClick={() => setOpen(true)}>
-                <img src="/hoco.JPG" className="w-24 object-cover" alt="hoco" />
+                <img src={`${process.env.BASE_PATH || ''}/hoco.JPG`} className="w-24 object-cover" alt="hoco" />
                 <div className="p-4">
                     <h3 className="font-medium">
                         {props.name} – ({props.date}){props.finalized === 'FALSE' && <span className="text-red-600">*</span>}
@@ -81,7 +81,7 @@ function EventCard(props: Event) {
                                 {props.name}
                             </Dialog.Title>
 
-                            <img src="/hoco.JPG" className="mb-4" alt="hoco" />
+                            <img src={`${process.env.BASE_PATH || ''}/hoco.JPG`} className="mb-4" alt="hoco" />
 
                             <Dialog.Description className="whitespace-pre-wrap">
                                 {props.longDesc}
