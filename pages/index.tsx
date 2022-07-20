@@ -10,7 +10,7 @@ export default function Home() {
                 <link rel="icon" href="/favicon.ico"/>
             </Head>
 
-            <main className="w-64 p-6 bg-white rounded-lg">
+            <main className="w-64 p-6 bg-white/80 rounded-lg">
                 <h1 className="text-2xl font-medium mb-2">Events app</h1>
                 <p>Created with love by the SEC.</p>
             </main>
