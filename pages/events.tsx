@@ -1,8 +1,9 @@
 import Head from 'next/head';
 import {ReactNode} from 'react';
+import {getEventsList} from '../utils/sheets';
 
 
-export default function Events() {
+export default function Events(props: {events: {[key: string]: Event[]}}) {
     return (
         <div className="container py-24">
             <Head>
@@ -13,27 +14,12 @@ export default function Events() {
 
             <h1 className="text-xl font-semibold mb-4">List of all school events:</h1>
 
-            <section className="columns-2 space-y-6">
-                <EventMonth month="September">
-                    <EventCard />
-                    <EventCard />
-                </EventMonth>
-                <EventMonth month="October">
-                    <EventCard />
-                    <EventCard />
-                    <EventCard />
-                </EventMonth>
-                <EventMonth month="November">
-                    <EventCard />
-                    <EventCard />
-                    <EventCard />
-                    <EventCard />
-                </EventMonth>
-                <EventMonth month="December">
-                    <EventCard />
-                    <EventCard />
-                    <EventCard />
-                </EventMonth>
+            <section className="columns-2 gap-6 space-y-6">
+                {Object.entries(props.events).map(([month, events]) => (
+                    <EventMonth month={month}>
+                        {events.map((event) => <EventCard {...event} />)}
+                    </EventMonth>
+                ))}
             </section>
         </div>
     )
@@ -50,16 +36,29 @@ function EventMonth(props: {month: string, children: ReactNode}) {
     )
 }
 
-function EventCard() {
+function EventCard(props: Event) {
     return (
         <div className="flex gap-3 rounded-lg overflow-hidden border border-gray-300">
             <img src="/hoco.JPG" className="w-24 object-cover" alt="hoco" />
             <div className="p-4">
-                <h3 className="font-medium">Homecoming</h3>
-                <p className="text-gray-400 text-sm">
-                    A week in October celebrating the first football game of the season.
-                </p>
+                <h3 className="font-medium">{props.name}</h3>
+                <p className="text-gray-400 text-sm">{props.shortDesc}</p>
             </div>
         </div>
     )
+}
+
+type Event = {name: string, shortDesc: string, longDesc: string, date: string, finalized: boolean};
+export async function getStaticProps() {
+    const events = await getEventsList();
+    const parsed: {[key: string]: Event[]} = {};
+
+    events?.forEach(([name, shortDesc, longDesc, month, date, finalized]) => {
+        if (!parsed[month]) parsed[month] = [];
+        parsed[month].push({name, shortDesc, longDesc, date, finalized});
+    })
+
+    return {
+        props: {events: parsed}
+    }
 }
