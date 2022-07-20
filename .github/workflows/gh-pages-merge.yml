@@ -12,7 +12,7 @@ jobs:
           CLIENT_EMAIL: ${{ secrets.CLIENT_EMAIL }}
           PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
           SPREADSHEET_ID: ${{ secrets.EVENTS_APP_SPREADSHEET_ID }}
-      - run: npm ci && CI=false npm run build && npm run export
+        run: npm ci && CI=false npm run build && npm run export
       - uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
