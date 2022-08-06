@@ -1,5 +1,6 @@
 import {ReactNode} from 'react';
 import Head from 'next/head';
+import Link from 'next/link';
 
 
 // TODO: responsive design (the title and event description die-by-side should probably be a `flex-wrap lg:flex-nowrap`
@@ -79,12 +80,16 @@ export default function Home() {
 
 function ImageCard(props: {src: string, title: string, children: ReactNode}) {
     return (
-        <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-            <img src={props.src} alt={props.title} className="w-[32rem] h-80 object-cover" />
-            <div className="p-5">
-                <h5 className="font-medium">{props.title}</h5>
-                <p className="text-gray-400">{props.children}</p>
-            </div>
-        </div>
+        <Link href="/events">
+            <a>
+                <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+                    <img src={props.src} alt={props.title} className="w-[32rem] h-80 object-cover" />
+                    <div className="p-5">
+                        <h5 className="font-medium">{props.title}</h5>
+                        <p className="text-gray-400">{props.children}</p>
+                    </div>
+                </div>
+            </a>
+        </Link>
     )
 }
