@@ -14,8 +14,8 @@ export default function Home() {
                 <link rel="icon" href={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/favicon.ico`} />
             </Head>
 
-            <main className="container py-24">
-                <section className="flex gap-8 justify-between mb-16">
+            <main className="py-24">
+                <section className="container flex flex-col lg:flex-row gap-8 justify-between mb-8">
                     <div>
                         <h1 className="font-[Limelight] font-medium text-9xl underline decoration-2 underline-offset-4 -mb-12">
                             Home-
@@ -30,24 +30,32 @@ export default function Home() {
                             </h3>
                         </div>
                     </div>
-                    <div className="border-l border-gray-400 px-8 py-4 h-max">
-                        <h5 className="font-bold">BRUNCH:</h5>
-                        <p className="mb-4">Balloon Stomp</p>
-                        <h5 className="font-bold">LUNCH:</h5>
-                        <p>Obstacle Course</p>
+
+                    <div className="flex lg:flex-col gap-12 lg:gap-4 border-t lg:border-t-0 lg:border-l border-gray-400 px-4 py-8 lg:px-8 lg:py-4 h-max">
+                        <div>
+                            <h5 className="font-bold">BRUNCH:</h5>
+                            <p>Balloon Stomp</p>
+                        </div>
+                        <div>
+                            <h5 className="font-bold">LUNCH:</h5>
+                            <p>Obstacle Course</p>
+                        </div>
                     </div>
                 </section>
 
-                <section className="flex gap-8 mb-16">
-                    <ImageCard src="/hoco.JPG" title="Balloon Stomp">
-                        Teams of two try to stomp out the competition.
-                    </ImageCard>
-                    <ImageCard src="/hoco.JPG" title="Obstacle Course">
-                        Obstacle course!
-                    </ImageCard>
+                <section className="py-8 bg-gray-100 mb-8">
+                    {/* TODO: flex-wrap is a little awkward */}
+                    <div className="container flex flex-wrap justify-center gap-8">
+                        <ImageCard src="/hoco.JPG" title="Balloon Stomp">
+                            Teams of two try to stomp out the competition.
+                        </ImageCard>
+                        <ImageCard src="/hoco.JPG" title="Obstacle Course">
+                            Obstacle course!
+                        </ImageCard>
+                    </div>
                 </section>
 
-                <section>
+                <section className="container">
                     <h3 className="font-medium text-gray-400 mb-4">Current standings:</h3>
                     {/* TODO: abstract these, think of a way of converting points -> width */}
                     <div className="flex flex-col gap-3">

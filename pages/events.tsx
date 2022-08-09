@@ -17,8 +17,10 @@ export default function Events(props: {events: {[key: string]: Event[]}}) {
 
             <section className="lg:columns-2 gap-6 space-y-6">
                 {Object.entries(props.events).map(([month, events]) => (
-                    <EventMonth month={month}>
-                        {events.map((event) => <EventCard {...event} />)}
+                    <EventMonth month={month} key={month}>
+                        {events.map((event) => (
+                            <EventCard {...event} key={event.name + event.date}/>
+                        ))}
                     </EventMonth>
                 ))}
             </section>
