@@ -1,4 +1,4 @@
-name: Deploy to gh-pages on merge
+name: Deploy to vercel on merge
 on:
   push:
     branches:
@@ -12,7 +12,7 @@ jobs:
           CLIENT_EMAIL: ${{ secrets.CLIENT_EMAIL }}
           PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
           SPREADSHEET_ID: ${{ secrets.EVENTS_APP_SPREADSHEET_ID }}
-        run: npm ci && CI=false npm run build && npm run export
+        run: npm ci && CI=false npm run build
       - uses: amondnet/vercel-action@v20
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
