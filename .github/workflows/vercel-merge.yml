@@ -1,5 +1,5 @@
 name: Deploy to gh-pages on merge
-'on':
+on:
   push:
     branches:
       - main
@@ -12,9 +12,10 @@ jobs:
           CLIENT_EMAIL: ${{ secrets.CLIENT_EMAIL }}
           PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
           SPREADSHEET_ID: ${{ secrets.EVENTS_APP_SPREADSHEET_ID }}
-          NEXT_PUBLIC_BASE_PATH: '/events-app' # TODO: ideally this would be deployed on a subdomain at root and there wouldn't be a need for this
         run: npm ci && CI=false npm run build && npm run export
-      - uses: peaceiris/actions-gh-pages@v3
+      - uses: amondnet/vercel-action@v20
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: './out'
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          vercel-org-id: ${{ secrets.ORG_ID}}
+          vercel-project-id: ${{ secrets.PROJECT_ID}}
