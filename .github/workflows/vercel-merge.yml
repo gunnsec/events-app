@@ -12,7 +12,7 @@ jobs:
         with:
           token: ${{ secrets.VERCEL_TOKEN }}
           projectName: events-app
-          envVariableKeys: ENV_VAR1,ENV_VAR2
+          envVariableKeys: CLIENT_EMAIL,PRIVATE_KEY,SPREADSHEET_ID
         env:
           CLIENT_EMAIL: ${{ secrets.CLIENT_EMAIL }}
           TARGET_CLIENT_EMAIL: preview,development,production
