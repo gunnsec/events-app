@@ -91,7 +91,7 @@ function ImageCard(props: {src: string, title: string, children: ReactNode}) {
         <Link href="/events">
             <a>
                 <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-                    <img src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}${props.src}`} alt={props.title} className="w-[32rem] h-80 object-cover" />
+                    <img src={props.src} alt={props.title} className="w-[32rem] h-80 object-cover" />
                     <div className="p-5">
                         <h5 className="font-medium">{props.title}</h5>
                         <p className="text-gray-400">{props.children}</p>
