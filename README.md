@@ -1,5 +1,5 @@
 # events-app
-An app for keeping track of SEC events!
+Everything you need to know about SEC events.
 
 ### Running locally
 Make sure you have a compatible version of Node installed.

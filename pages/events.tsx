@@ -10,7 +10,6 @@ export default function Events(props: {events: {[key: string]: Event[]}}) {
             <Head>
                 <title>Events List | SEC</title>
                 <meta name="description" content="A list of all school events." />
-                <link rel="icon" href={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/favicon.ico`} />
             </Head>
 
             <h1 className="text-xl font-semibold mb-4">List of all school events:</h1>
