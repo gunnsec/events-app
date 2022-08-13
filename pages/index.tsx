@@ -19,7 +19,7 @@ export default function Home() {
                 </div>
             </section>
 
-            <section className="bg-gray-100 py-16">
+            <section className="bg-gray-100 dark:bg-zinc-800 py-16">
                 <Marquee className="events-marquee gap-1.5" gradientWidth={150}>
                     <img src="/hoco.JPG" alt="Homecoming" className="max-h-64" />
                     <img src="/hoco.JPG" alt="Homecoming" className="max-h-64" />
