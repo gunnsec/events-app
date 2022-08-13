@@ -1,10 +1,11 @@
 import Head from 'next/head';
 import Marquee from 'react-fast-marquee';
+import Layout from '../components/Layout';
 
 
 export default function Home() {
     return (
-        <div className="py-24">
+        <Layout>
             <Head>
                 <title>Events | SEC</title>
                 <meta name="description" content="Everything you need to know about SEC events." />
@@ -45,6 +46,6 @@ export default function Home() {
                     wishing to do so can leverage the events API. Read the API docs here.
                 </p>
             </section>
-        </div>
+        </Layout>
     )
 }

@@ -1,20 +1,21 @@
 import {ReactNode, useState, Fragment} from 'react';
 import Head from 'next/head';
 import {Dialog, Transition} from '@headlessui/react';
+import Layout from '../components/Layout';
 import {getEventsList} from '../utils/sheets';
 
 
 export default function Events(props: {events: {[key: string]: Event[]}}) {
     return (
-        <div className="container py-24">
+        <Layout>
             <Head>
                 <title>Events List | SEC</title>
                 <meta name="description" content="A list of all school events." />
             </Head>
 
-            <h1 className="text-xl font-semibold mb-4">List of all school events:</h1>
+            <h1 className="text-center text-3xl font-bold mb-8">List of all school events:</h1>
 
-            <section className="lg:columns-2 gap-6 space-y-6">
+            <section className="container lg:columns-2 gap-6 space-y-6">
                 {Object.entries(props.events).map(([month, events]) => (
                     <EventMonth month={month} key={month}>
                         {events.map((event) => (
@@ -23,7 +24,7 @@ export default function Events(props: {events: {[key: string]: Event[]}}) {
                     </EventMonth>
                 ))}
             </section>
-        </div>
+        </Layout>
     )
 }
 
