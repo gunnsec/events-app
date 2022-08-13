@@ -37,9 +37,9 @@ After defining environment variables, run `npm install` to install dependencies 
 on `localhost:3000`.
 
 ### Deploying
-Every push to `main` automatically rebuilds and deploys the site using GitHub actions and pages. To set environment
-variables in the workflow, `CLIENT_EMAIL`, `PRIVATE_KEY`, and `EVENTS_APP_SPREADSHEET_ID` are kept as organization
-secrets.
+Every push to `main` automatically rebuilds and deploys the site to Vercel with GitHub actions, using [the configuration described here](https://gist.github.com/ky28059/1c9af929a9030105da8cf00006b50484). 
+To set environment variables in the workflow, `CLIENT_EMAIL`, `PRIVATE_KEY`, and `EVENTS_APP_SPREADSHEET_ID` are kept as 
+organization secrets.
 
 ![image](https://user-images.githubusercontent.com/60120929/180081903-f2d2215d-a572-4a33-a38e-0954f6bc250b.png)
 

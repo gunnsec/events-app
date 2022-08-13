@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#__next {
+    @apply h-full;
+}
+
+.events-marquee {
+    .overlay {
+        --gradient-color: theme('colors.gray.100' / 100%), theme('colors.gray.100' / 0%) !important;
+    }
+    .marquee {
+        @apply gap-1.5;
+    }
+}
