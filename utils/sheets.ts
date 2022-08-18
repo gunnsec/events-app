@@ -11,13 +11,23 @@ const auth = new google.auth.GoogleAuth({
 
 const sheets = google.sheets({ version: 'v4', auth });
 
-// Returns all fully filled out rows in the events spreadsheet.
-export async function getEventsList() {
+// Returns all filled out rows in the events spreadsheet.
+export type Event = {
+    name: string, shortDesc: string, longDesc: string,
+    month: string, date: string, finalized: boolean
+}
+export async function getEventsList(): Promise<Event[] | undefined> {
     const res = await sheets.spreadsheets.values.get({
         auth, spreadsheetId: process.env.SPREADSHEET_ID,
         range: '\'List of events\'!A2:F1000'
     });
     if (!res.data.values) return;
 
-    return res.data.values.filter(row => row.every(x => x));
+    return res.data.values.filter(row => row.every(x => x)).map(row => {
+        const [name, shortDesc, longDesc, month, date, finalized] = row;
+        return {
+            name, shortDesc, longDesc, month, date,
+            finalized: finalized === 'TRUE'
+        }
+    });
 }

@@ -2,7 +2,7 @@ import {ReactNode, useState, Fragment} from 'react';
 import Head from 'next/head';
 import {Dialog, Transition} from '@headlessui/react';
 import Layout from '../components/Layout';
-import {getEventsList} from '../utils/sheets';
+import {getEventsList, Event} from '../utils/sheets';
 
 
 export default function Events(props: {events: {[key: string]: Event[]}}) {
@@ -48,14 +48,14 @@ function EventCard(props: Event) {
                 <img src="/hoco.JPG" className="w-24 object-cover" alt="hoco" />
                 <div className="p-4">
                     <h3 className="font-medium">
-                        {props.name} – ({props.date}){props.finalized === 'FALSE' && <span className="text-red-600">*</span>}
+                        {props.name} – ({props.date}){!props.finalized && <span className="text-red-600">*</span>}
                     </h3>
                     <p className="text-gray-400 text-sm">{props.shortDesc}</p>
                 </div>
             </div>
 
             <Transition show={open} as={Fragment}>
-                <Dialog onClose={() => setOpen(false)} className="fixed z-10 inset-0 flex items-center justify-center">
+                <Dialog onClose={() => setOpen(false)} className="fixed z-30 inset-0 flex items-center justify-center">
                     <Transition.Child
                         as={Fragment}
                         enter="ease-out duration-300"
@@ -95,14 +95,14 @@ function EventCard(props: Event) {
     )
 }
 
-type Event = {name: string, shortDesc: string, longDesc: string, date: string, finalized: 'TRUE' | 'FALSE'};
+// Get the events list and map months to events occurring on that month.
 export async function getStaticProps() {
     const events = await getEventsList();
     const parsed: {[key: string]: Event[]} = {};
 
-    events?.forEach(([name, shortDesc, longDesc, month, date, finalized]) => {
-        if (!parsed[month]) parsed[month] = [];
-        parsed[month].push({name, shortDesc, longDesc, date, finalized});
+    events?.forEach((event) => {
+        if (!parsed[event.month]) parsed[event.month] = [];
+        parsed[event.month].push(event);
     })
 
     return {
