@@ -1,9 +1,11 @@
 import Head from 'next/head';
 import Marquee from 'react-fast-marquee';
 import Layout from '../components/Layout';
+import {getEventsList, Event} from '../utils/sheets';
+import {EventCard} from '../components/EventCard';
 
 
-export default function Home() {
+export default function Home(props: {upcoming: Event[]}) {
     return (
         <Layout>
             <Head>
@@ -12,15 +14,24 @@ export default function Home() {
             </Head>
 
             <section className="container flex gap-8 mb-12">
-                <img src="/gunn.jfif" alt="Gunn logo" className="w-32 h-32 rounded-2xl shadow-xl" />
-                <div className="pt-4">
+                <img src="/gunn.jfif" alt="Gunn logo" className="hidden md:block w-32 h-32 rounded-2xl shadow-xl" />
+                <div className="pt-4 flex-grow min-w-0">
                     <h1 className="font-bold text-7xl mb-4">Events | SEC</h1>
-                    <p>Everything you need to know about events at Gunn.</p>
+                    <p className="mb-4">
+                        {/* TODO: wording */}
+                        Everything you need to know about events at Gunn. Upcoming events:
+                    </p>
+                    {/* TODO: this grid columns breakpoint is a bit hacky */}
+                    <section className="grid grid-cols-1 md:grid-cols-[repeat(auto-fill,_minmax(375px,_1fr))] gap-2">
+                        {props.upcoming.map(event => (
+                            <EventCard {...event} key={event.name + event.date} />
+                        ))}
+                    </section>
                 </div>
             </section>
 
             <section className="bg-light dark:bg-dark py-16">
-                <Marquee className="events-marquee gap-1.5" gradientWidth={150}>
+                <Marquee className="events-marquee gap-1.5" gradientWidth={125}>
                     <img src="/hoco.JPG" alt="Homecoming" className="max-h-64" />
                     <img src="/hoco.JPG" alt="Homecoming" className="max-h-64" />
                     <img src="/hoco.JPG" alt="Homecoming" className="max-h-64" />
@@ -48,4 +59,18 @@ export default function Home() {
             </section>
         </Layout>
     )
+}
+
+// Get the next 3 upcoming events to display on the home page.
+export async function getStaticProps() {
+    const events = await getEventsList();
+    const upcoming = events
+        ?.filter((event: Event) => event.date > new Date().toISOString().slice(5, 10))
+        .slice(0, 3)
+        ?? [];
+
+    return {
+        props: {upcoming},
+        revalidate: 60
+    }
 }
