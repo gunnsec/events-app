@@ -9,9 +9,9 @@
 // Style overrides for the home page image marquee
 .events-marquee {
     .overlay {
-        --gradient-color: theme('colors.gray.100' / 100%), theme('colors.gray.100' / 0%) !important;
+        --gradient-color: theme('colors.light' / 100%), theme('colors.light' / 0%) !important;
         .dark & {
-            --gradient-color: theme('colors.zinc.800' / 100%), theme('colors.zinc.800' / 0%) !important;
+            --gradient-color: theme('colors.dark' / 100%), theme('colors.dark' / 0%) !important;
         }
     }
     .marquee {

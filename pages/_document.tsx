@@ -10,7 +10,7 @@ class SECDocument extends Document {
                     <link rel="icon" href="/favicon.ico" />
                     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Limelight:300,400,500" />
                 </Head>
-                <body className="h-full dark:bg-zinc-900 dark:text-white">
+                <body className="h-full dark:bg-midnight dark:text-white">
                     <Main />
                     <NextScript />
                 </body>
