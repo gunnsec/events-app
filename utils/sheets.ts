@@ -14,19 +14,19 @@ const sheets = google.sheets({ version: 'v4', auth });
 // Returns all filled out rows in the events spreadsheet.
 export type Event = {
     name: string, shortDesc: string, longDesc: string,
-    month: string, date: string, finalized: boolean
+    month: string, date: string, finalized: boolean, image: string
 }
 export async function getEventsList(): Promise<Event[] | undefined> {
     const res = await sheets.spreadsheets.values.get({
         auth, spreadsheetId: process.env.SPREADSHEET_ID,
-        range: '\'List of events\'!A2:F1000'
+        range: '\'List of events\'!A2:G1000'
     });
     if (!res.data.values) return;
 
     return res.data.values.filter(row => row.every(x => x)).map(row => {
-        const [name, shortDesc, longDesc, month, date, finalized] = row;
+        const [name, shortDesc, longDesc, month, date, finalized, image] = row;
         return {
-            name, shortDesc, longDesc, month, date,
+            name, shortDesc, longDesc, month, date, image,
             finalized: finalized === 'TRUE'
         }
     });
