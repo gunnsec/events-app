@@ -8,7 +8,7 @@ export function EventCard(props: Event) {
 
     return (
         <>
-            <div className="flex gap-3 rounded-lg cursor-pointer overflow-hidden border border-gray-300 hover:border-gray-500 dark:border-gray-600 dark:hover:border-gray-300 transition-[border] duration-200" onClick={() => setOpen(true)}>
+            <div className="flex gap-3 rounded-lg cursor-pointer overflow-hidden border border-tertiary hover:border-secondary dark:border-tertiary-dark dark:hover:border-secondary-dark transition-[border] duration-200" onClick={() => setOpen(true)}>
                 <img src={props.image} className="w-24 object-cover" alt={props.name} />
                 <div className="p-4">
                     <h3 className="font-medium">

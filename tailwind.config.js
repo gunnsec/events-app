@@ -11,11 +11,15 @@ module.exports = {
     extend: {
       colors: {
         light: colors.gray['100'], // Secondary section color on light mode
-        dark: colors.zinc['800'], // Secondary section color on dark mode
+        dark: '#26252C', // Secondary section color on dark mode
         midnight: '#1B1B1B', // Bg color on dark mode
         secondary: { // Secondary text color
-          DEFAULT: colors.gray['400'],
-          dark: colors.gray['400'] // TODO: currently these are the same; do we want to make them different?
+          DEFAULT: 'rgba(0, 0, 0, 0.54)',
+          dark: 'rgba(249, 250, 251, 0.54)'
+        },
+        tertiary: { // Tertiary text color
+          DEFAULT: 'rgba(0, 0, 0, 0.15)',
+          dark: 'rgba(255, 255, 255, 0.15)'
         }
       }
     },
