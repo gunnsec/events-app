@@ -5,9 +5,9 @@ import Footer from './Footer';
 
 export default function Layout(props: {children: ReactNode}) {
     return (
-        <div className="space-y-24">
+        <div className="h-full flex flex-col gap-24">
             <Header />
-            <main>
+            <main className="flex-grow">
                 {props.children}
             </main>
             <Footer />

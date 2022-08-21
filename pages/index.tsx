@@ -17,7 +17,7 @@ export default function Home(props: {upcoming: Event[]}) {
             <section className="container flex gap-8 mb-10">
                 <img src="/gunn.jfif" alt="Gunn logo" className="hidden md:block w-32 h-32 rounded-2xl shadow-xl" />
                 <div className="flex-grow min-w-0">
-                    <h1 className="font-bold text-9xl text-transparent bg-gradient-to-br from-[#ff594c] via-red-500 to-pink-500 bg-clip-text mb-4 -mt-2">
+                    <h1 className="font-bold text-8xl sm:text-9xl text-transparent bg-gradient-to-br from-[#ff594c] via-red-500 to-pink-500 bg-clip-text mb-4 -mt-2">
                         Events | SEC
                     </h1>
                     <p className="mb-4">
