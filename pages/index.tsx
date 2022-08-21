@@ -47,9 +47,16 @@ export default function Home(props: {upcoming: Event[]}) {
             </section>
 
             <Section name="Feedback">
-                <p>
-                    Have urgent feedback for SEC about an event taking place? ___.
+                <p className="mb-4">
+                    Have urgent feedback for SEC about an event taking place? Want to tell us about an awesome dress-up
+                    day idea you had? Have literally anything else you want SEC to know or address? Feel free to share
+                    your thoughts with us using the feedback form below!
                 </p>
+                <a href="https://forms.gle/HYQzc48S8eoyQxdk8" target="_blank" rel="noopener noreferrer" tabIndex={-1}>
+                    <button className="text-white font-medium px-3.5 py-2 rounded-md shadow-lg shadow-red-500 dark:shadow-red-700 bg-gradient-to-br from-[#ff594c] via-red-500 to-pink-500 focus:outline-none focus-visible:ring-[3px] focus-visible:ring-[0xFF7DADD9]">
+                        Give feedback
+                    </button>
+                </a>
             </Section>
 
             <Section name="API">
@@ -64,7 +71,7 @@ export default function Home(props: {upcoming: Event[]}) {
 
 function Section(props: {name: string, children: ReactNode}) {
     return (
-        <section className="container mt-20 flex flex-col sm:flex-row gap-4 sm:gap-8">
+        <section className="container mt-24 flex flex-col sm:flex-row gap-4 sm:gap-8">
             <div className="sm:flex-none sm:w-56 sm:text-right">
                 <h3 className="font-bold text-4xl">{props.name}</h3>
             </div>
