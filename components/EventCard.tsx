@@ -10,7 +10,7 @@ export function EventCard(props: Event) {
         <>
             <div className="flex gap-3 rounded-lg cursor-pointer overflow-hidden border border-tertiary hover:border-secondary dark:border-tertiary-dark dark:hover:border-secondary-dark transition-[border] duration-200" onClick={() => setOpen(true)}>
                 {/* TODO: better default image */}
-                <img src={props.image ?? '/hoco.JPG'} className="w-24 object-cover" alt={props.name} />
+                <img src={props.image ?? '/hoco.JPG'} className="w-24 h-20 object-cover" alt={props.name} />
                 <div className="p-4">
                     <h3 className="font-medium">
                         {/* TODO: hacky conversion of ISO date string to something more human readable; */}
@@ -49,13 +49,13 @@ export function EventCard(props: Event) {
                         leaveTo="opacity-0 scale-95"
                     >
                         <Dialog.Panel className="relative max-w-xl bg-white dark:bg-dark rounded-md px-7 py-5 shadow-xl">
-                            <Dialog.Title className="text-lg font-medium -mt-1 mb-2">
+                            <Dialog.Title className="text-xl font-medium -mt-1 mb-2">
                                 {props.name}
                             </Dialog.Title>
 
-                            {props.image && props.imageCredits && (
-                                <div className="flex flex-col gap-2">
-                                    <img src={props.image} className="mb-4" alt={props.name} />
+                            {(props.image && props.imageCredits) && (
+                                <div className="flex flex-col gap-2 mb-4">
+                                    <img src={props.image} alt={props.name} />
                                     <p className="text-sm italic text-secondary dark:text-secondary-dark">
                                         {props.imageCredits}
                                     </p>

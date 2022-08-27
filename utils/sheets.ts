@@ -20,7 +20,7 @@ export type Event = {
 export async function getEventsList(): Promise<Event[] | undefined> {
     const res = await sheets.spreadsheets.values.get({
         auth, spreadsheetId: process.env.SPREADSHEET_ID,
-        range: '\'List of events\'!A2:G1000'
+        range: '\'List of events\'!A2:H1000'
     });
     if (!res.data.values) return;
 
