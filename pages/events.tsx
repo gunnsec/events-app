@@ -45,8 +45,12 @@ export async function getStaticProps() {
     const parsed: {[key: string]: Event[]} = {};
 
     events?.forEach((event) => {
-        if (!parsed[event.month]) parsed[event.month] = [];
-        parsed[event.month].push(event);
+        const date = new Date();
+        date.setMonth(Number(event.date.split('-')[0]) - 1);
+        const month = date.toLocaleString('en-US', {month: 'long'});
+
+        if (!parsed[month]) parsed[month] = [];
+        parsed[month].push(event);
     })
 
     return {
