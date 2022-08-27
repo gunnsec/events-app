@@ -81,8 +81,22 @@ function Section(props: {name: string, children: ReactNode}) {
 // We parse upcoming events here instead of on client side to avoid hydration errors with `new Date()`.
 export async function getStaticProps() {
     const events = await getEventsList();
-    const upcoming = events?.filter((event: Event) => event.date > new Date().toISOString().slice(5, 10)).slice(0, 3)
-        ?? [];
+    const upcoming = events?.filter((event) => {
+        const now = new Date();
+
+        // The first year of the school year (2021-2022 -> 2021). If the current month is less than 7 (july), assume
+        // the current year is the second year of the school year.
+        const year = (now.getMonth() + 1) < 7
+            ? now.getFullYear() - 1
+            : now.getFullYear();
+
+        // If the month is less than 7 (july), assume it takes place in the second semester.
+        const date = (Number(event.date.split('-')[0]) < 7)
+            ? `${year + 1}-${event.date}`
+            : `${year}-${event.date}`;
+
+        return date > now.toISOString().slice(0, 10);
+    }).slice(0, 3) ?? [];
 
     return {
         props: {events, upcoming},

@@ -10,7 +10,11 @@ export function EventCard(props: Event) {
         <>
             <div className="flex gap-3 rounded-lg cursor-pointer overflow-hidden border border-tertiary hover:border-secondary dark:border-tertiary-dark dark:hover:border-secondary-dark transition-[border] duration-200" onClick={() => setOpen(true)}>
                 {/* TODO: better default image */}
-                <img src={props.image ?? '/hoco.JPG'} className="w-24 h-20 object-cover" alt={props.name} />
+                <div
+                    className="w-24 flex-none bg-cover bg-center"
+                    style={{backgroundImage: `url(${props.image ?? '/hoco.JPG'})`}}
+                />
+
                 <div className="p-4">
                     <h3 className="font-medium">
                         {/* TODO: hacky conversion of ISO date string to something more human readable; */}
