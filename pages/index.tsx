@@ -4,10 +4,9 @@ import Marquee from 'react-fast-marquee';
 import Layout from '../components/Layout';
 import {getEventsList, Event} from '../utils/sheets';
 import {EventCard} from '../components/EventCard';
-import {readdirSync} from 'fs';
 
 
-export default function Home(props: {images: string[], upcoming: Event[]}) {
+export default function Home(props: {events: Event[], upcoming: Event[]}) {
     return (
         <Layout>
             <Head>
@@ -36,12 +35,9 @@ export default function Home(props: {images: string[], upcoming: Event[]}) {
 
             <section className="bg-light dark:bg-dark py-12">
                 <Marquee className="events-marquee gap-1.5" gradientWidth={125}>
-                    {props.images.map(image => (
-                        <img src={image} alt="Event image" className="max-h-64" />
+                    {props.events.filter(event => event.image).map(({image}) => (
+                        <img src={image!} alt="Event image" className="max-h-64" />
                     ))}
-                    <img src="/hoco.JPG" alt="Homecoming" className="max-h-64" />
-                    <img src="/hoco.JPG" alt="Homecoming" className="max-h-64" />
-                    <img src="/hoco.JPG" alt="Homecoming" className="max-h-64" />
                 </Marquee>
             </section>
 
@@ -81,18 +77,15 @@ function Section(props: {name: string, children: ReactNode}) {
     )
 }
 
-// Get the event images urls for the home page marquee and the next 3 events for the upcoming section.
+// Get the events list for the image marquee and upcoming events for the home page section.
+// We parse upcoming events here instead of on client side to avoid hydration errors with `new Date()`.
 export async function getStaticProps() {
-    const images = readdirSync('./public/events').map(image => `/events/${image}`);
-
     const events = await getEventsList();
-    const upcoming = events
-        ?.filter((event: Event) => event.date > new Date().toISOString().slice(5, 10))
-        .slice(0, 3)
+    const upcoming = events?.filter((event: Event) => event.date > new Date().toISOString().slice(5, 10)).slice(0, 3)
         ?? [];
 
     return {
-        props: {images, upcoming},
+        props: {events, upcoming},
         revalidate: 60
     }
 }
