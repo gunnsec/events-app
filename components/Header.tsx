@@ -24,7 +24,7 @@ function NavLink(props: {href: string, children: ReactNode}) {
 
     return (
         <Link href={props.href}>
-            <a className={'block p-5 hover:bg-gray-100 dark:hover:bg-zinc-800 transition-[background-color] duration-300' + (active ? ' font-medium' : '')}>
+            <a className={'block p-5 hover:bg-gray-100 dark:hover:bg-zinc-800 transition-[background-color] duration-300' + (active ? ' text-red-700 dark:text-[#ff594c]' : '')}>
                 {props.children}
             </a>
         </Link>

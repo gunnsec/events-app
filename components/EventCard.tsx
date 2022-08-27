@@ -9,7 +9,8 @@ export function EventCard(props: Event) {
     return (
         <>
             <div className="flex gap-3 rounded-lg cursor-pointer overflow-hidden border border-tertiary hover:border-secondary dark:border-tertiary-dark dark:hover:border-secondary-dark transition-[border] duration-200" onClick={() => setOpen(true)}>
-                <img src={props.image} className="w-24 object-cover" alt={props.name} />
+                {/* TODO: better default image */}
+                <img src={props.image ?? '/hoco.JPG'} className="w-24 object-cover" alt={props.name} />
                 <div className="p-4">
                     <h3 className="font-medium">
                         {/* TODO: hacky conversion of ISO date string to something more human readable; */}
@@ -52,7 +53,14 @@ export function EventCard(props: Event) {
                                 {props.name}
                             </Dialog.Title>
 
-                            <img src={props.image} className="mb-4" alt={props.name} />
+                            {props.image && props.imageCredits && (
+                                <div className="flex flex-col gap-2">
+                                    <img src={props.image} className="mb-4" alt={props.name} />
+                                    <p className="text-sm italic text-secondary dark:text-secondary-dark">
+                                        {props.imageCredits}
+                                    </p>
+                                </div>
+                            )}
 
                             <Dialog.Description className="whitespace-pre-wrap">
                                 {props.longDesc}
