@@ -4,9 +4,10 @@ import Marquee from 'react-fast-marquee';
 import Layout from '../components/Layout';
 import {getEventsList, Event} from '../utils/sheets';
 import {EventCard} from '../components/EventCard';
+import {readdirSync} from 'fs';
 
 
-export default function Home(props: {upcoming: Event[]}) {
+export default function Home(props: {images: string[], upcoming: Event[]}) {
     return (
         <Layout>
             <Head>
@@ -35,11 +36,9 @@ export default function Home(props: {upcoming: Event[]}) {
 
             <section className="bg-light dark:bg-dark py-12">
                 <Marquee className="events-marquee gap-1.5" gradientWidth={125}>
-                    <img src="/hoco.JPG" alt="Homecoming" className="max-h-64" />
-                    <img src="/hoco.JPG" alt="Homecoming" className="max-h-64" />
-                    <img src="/hoco.JPG" alt="Homecoming" className="max-h-64" />
-                    <img src="/hoco.JPG" alt="Homecoming" className="max-h-64" />
-                    <img src="/hoco.JPG" alt="Homecoming" className="max-h-64" />
+                    {props.images.map(image => (
+                        <img src={image} alt="Event image" className="max-h-64" />
+                    ))}
                     <img src="/hoco.JPG" alt="Homecoming" className="max-h-64" />
                     <img src="/hoco.JPG" alt="Homecoming" className="max-h-64" />
                     <img src="/hoco.JPG" alt="Homecoming" className="max-h-64" />
@@ -82,8 +81,10 @@ function Section(props: {name: string, children: ReactNode}) {
     )
 }
 
-// Get the next 3 upcoming events to display on the home page.
+// Get the event images urls for the home page marquee and the next 3 events for the upcoming section.
 export async function getStaticProps() {
+    const images = readdirSync('./public/events').map(image => `/events/${image}`);
+
     const events = await getEventsList();
     const upcoming = events
         ?.filter((event: Event) => event.date > new Date().toISOString().slice(5, 10))
@@ -91,7 +92,7 @@ export async function getStaticProps() {
         ?? [];
 
     return {
-        props: {upcoming},
+        props: {images, upcoming},
         revalidate: 60
     }
 }
