@@ -5,7 +5,7 @@ import Footer from './Footer';
 
 export default function Layout(props: {children: ReactNode}) {
     return (
-        <div className="h-full">
+        <div className="h-full overflow-auto">
             <Header />
             <main className="flex-grow">
                 {props.children}

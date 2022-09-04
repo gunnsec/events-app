@@ -32,6 +32,25 @@ export async function getEventsList(): Promise<Event[] | undefined> {
     });
 }
 
+// Filters an array of events for those that occur after a given date. If no date is provided, the
+// current date is used.
+export function filterUpcomingEvents(events: Event[] | undefined, date = new Date()) {
+    return events?.filter((event) => {
+        // The first year of the school year (2021-2022 -> 2021). If the current month is less than 7 (july), assume
+        // the current year is the second year of the school year.
+        const year = (date.getMonth() + 1) < 7
+            ? date.getFullYear() - 1
+            : date.getFullYear();
+
+        // If the month is less than 7 (july), assume it takes place in the second semester.
+        const iso = (Number(event.date.split('-')[0]) < 7)
+            ? `${year + 1}-${event.date}`
+            : `${year}-${event.date}`;
+
+        return iso > date.toISOString().slice(0, 10);
+    });
+}
+
 export type RallyCupClassStandings = {name: string, total: number, events: RallyCupEvent[]};
 type RallyCupEvent = {name: string, points: number}
 export async function getRallyCupStandings(): Promise<RallyCupClassStandings[]> {

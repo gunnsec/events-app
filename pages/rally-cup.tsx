@@ -1,11 +1,16 @@
 import {useEffect, useState} from 'react';
 import Head from 'next/head';
+
+// Components
 import Layout from '../components/Layout';
 import Section from '../components/Section';
-import {RallyCupClassStandings} from '../util/sheets';
+import EventCard from '../components/EventCard';
+
+// Utils
+import {Event, filterUpcomingEvents, getEventsList, RallyCupClassStandings} from '../util/sheets';
 
 
-export default function RallyCup() {
+export default function RallyCup(props: {upcoming: Event[]}) {
     const [standings, setStandings] = useState<RallyCupClassStandings[]>([]);
     const [maxPoints, setMaxPoints] = useState(0);
 
@@ -43,7 +48,12 @@ export default function RallyCup() {
                 </div>
             </Section>
             <Section>
-                <h3 className="text-3xl font-bold">Upcoming events:</h3>
+                <h3 className="text-3xl font-bold mb-6">Upcoming events:</h3>
+                <div className="grid grid-cols-[repeat(auto-fill,_minmax(375px,_1fr))] gap-2 pl-6">
+                    {props.upcoming.map(event => (
+                        <EventCard {...event} key={event.name + event.date} />
+                    ))}
+                </div>
             </Section>
         </Layout>
     )
@@ -67,4 +77,17 @@ function RallyCupRow(props: RallyCupClassStandings & {max: number}) {
             </div>
         </div>
     )
+}
+
+// Gets upcoming rally cup events.
+// TODO: currently this just pulls from the events list, which isn't accurate to which events give rally cup points.
+// We'll need a completely separate system for that, possibly even with a separate host of types and APi routes.
+export async function getStaticProps() {
+    const events = await getEventsList();
+    const upcoming = filterUpcomingEvents(events) ?? [];
+
+    return {
+        props: {upcoming},
+        revalidate: 60
+    }
 }

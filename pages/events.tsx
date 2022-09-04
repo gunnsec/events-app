@@ -1,7 +1,7 @@
 import {ReactNode} from 'react';
 import Head from 'next/head';
 import Layout from '../components/Layout';
-import {EventCard} from '../components/EventCard';
+import EventCard from '../components/EventCard';
 import {getEventsList, Event} from '../util/sheets';
 
 

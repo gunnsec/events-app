@@ -3,7 +3,7 @@ import {Dialog, Transition} from '@headlessui/react';
 import {Event} from '../util/sheets';
 
 
-export function EventCard(props: Event) {
+export default function EventCard(props: Event) {
     const [open, setOpen] = useState(false);
 
     return (
