@@ -71,7 +71,7 @@ export default function Home(props: {events: Event[], upcoming: Event[]}) {
 // TODO: section abstraction
 function Section(props: {name: string, children: ReactNode}) {
     return (
-        <section className="container mt-24 flex flex-col sm:flex-row gap-4 sm:gap-8">
+        <section className="container my-24 flex flex-col sm:flex-row gap-4 sm:gap-8">
             <div className="sm:flex-none sm:w-56 sm:text-right">
                 <h3 className="font-bold text-4xl">{props.name}</h3>
             </div>
