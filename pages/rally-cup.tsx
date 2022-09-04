@@ -7,14 +7,16 @@ import Section from '../components/Section';
 import EventCard from '../components/EventCard';
 
 // Utils
-import {Event, filterUpcomingEvents, getEventsList, RallyCupClassStandings} from '../util/sheets';
+import {Event, filterUpcomingEvents, getEventsList, getRallyCupStandings, RallyCupClassStandings} from '../util/sheets';
 
 
-export default function RallyCup(props: {upcoming: Event[]}) {
-    const [standings, setStandings] = useState<RallyCupClassStandings[]>([]);
+export default function RallyCup(props: {upcoming: Event[], standings: RallyCupClassStandings[]}) {
+    const [standings, setStandings] = useState<RallyCupClassStandings[]>(props.standings);
     const [maxPoints, setMaxPoints] = useState(0);
 
     // Fetch standings on mount
+    // TODO: should this periodically refetch on an interval? Also, this might be inefficient on mount
+    // because the standings are already prerendered with ISR.
     useEffect(() => {
         fetch('/api/rally-cup').then(res => res.json()).then((json: RallyCupClassStandings[]) => {
             setStandings(json);
@@ -69,7 +71,7 @@ function RallyCupRow(props: RallyCupClassStandings & {max: number}) {
                 <h5 className="font-medium mb-2">{props.name}</h5>
                 <div className="flex gap-4">
                     <div
-                        className="h-6 bg-midnight animate-pulse rounded-full"
+                        className="h-6 bg-midnight animate-pulse rounded-full transition-[width] duration-200"
                         style={{width: props.total / props.max * 100 + '%'}}
                     />
                     {props.total}
@@ -79,15 +81,17 @@ function RallyCupRow(props: RallyCupClassStandings & {max: number}) {
     )
 }
 
-// Gets upcoming rally cup events.
+// Get upcoming rally cup events and prerender rally cup standings.
 // TODO: currently this just pulls from the events list, which isn't accurate to which events give rally cup points.
 // We'll need a completely separate system for that, possibly even with a separate host of types and APi routes.
 export async function getStaticProps() {
     const events = await getEventsList();
     const upcoming = filterUpcomingEvents(events) ?? [];
 
+    const standings = await getRallyCupStandings();
+
     return {
-        props: {upcoming},
+        props: {upcoming, standings},
         revalidate: 60
     }
 }
