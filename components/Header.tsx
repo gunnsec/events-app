@@ -9,10 +9,11 @@ export default function Header() {
     const scroll = useScroll();
 
     return (
-        <header className={'flex items-center sticky top-0 z-20 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-sm px-8 transition-shadow duration-300 ' + (scroll > 0 ? 'shadow-md' : 'hover:shadow-md')}>
+        <header className={'flex items-center sticky top-0 z-20 bg-white/90 dark:bg-midnight/90 backdrop-blur-sm px-8 transition-shadow duration-300 ' + (scroll > 0 ? 'shadow-md' : 'hover:shadow-md')}>
             <img src="https://www.gunnsec.org/uploads/1/2/3/2/123265564/graphiconly.png" alt="SEC logo" className="w-8 h-8 mr-3" />
             <NavLink href="/">Home</NavLink>
             <NavLink href="/events">Events</NavLink>
+            <NavLink href="/rally-cup">Rally Cup</NavLink>
             <ThemeToggle className="cursor-pointer ml-auto" />
         </header>
     )

@@ -13,7 +13,7 @@ export default function Events(props: {events: {[key: string]: Event[]}}) {
                 <meta name="description" content="A list of all school events." />
             </Head>
 
-            <h1 className="text-center text-3xl font-bold mb-8">List of all school events:</h1>
+            <h1 className="text-center text-3xl font-bold mt-24 mb-8">List of all school events:</h1>
 
             <section className="container lg:columns-2 gap-6 space-y-6">
                 {Object.entries(props.events).map(([month, events]) => (
