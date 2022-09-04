@@ -1,7 +1,7 @@
 import {ReactNode} from 'react';
 import Link from 'next/link';
 import {useRouter} from 'next/router';
-import {useScroll} from '../utils/useScroll';
+import {useScroll} from '../util/useScroll';
 import ThemeToggle from './ThemeToggle';
 
 

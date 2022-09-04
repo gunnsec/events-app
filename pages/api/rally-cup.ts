@@ -1,5 +1,5 @@
 import {NextApiRequest, NextApiResponse} from 'next';
-import {getEventsList} from '../../utils/sheets';
+import {getRallyCupStandings} from '../../util/sheets';
 import cors from 'cors';
 
 
@@ -15,9 +15,9 @@ function runMiddleware(req: NextApiRequest, res: NextApiResponse, fn: Function) 
     })
 }
 
-// GET /api/events-list
+// GET /api/rally-cup
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     await runMiddleware(req, res, corsHandler);
-    const events = await getEventsList();
-    res.json(events);
+    const standings = await getRallyCupStandings();
+    res.json(standings);
 }

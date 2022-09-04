@@ -2,7 +2,7 @@ import {ReactNode} from 'react';
 import Head from 'next/head';
 import Marquee from 'react-fast-marquee';
 import Layout from '../components/Layout';
-import {getEventsList, Event} from '../utils/sheets';
+import {getEventsList, Event} from '../util/sheets';
 import {EventCard} from '../components/EventCard';
 
 
@@ -64,6 +64,7 @@ export default function Home(props: {events: Event[], upcoming: Event[]}) {
     )
 }
 
+// TODO: section abstraction
 function Section(props: {name: string, children: ReactNode}) {
     return (
         <section className="container mt-24 flex flex-col sm:flex-row gap-4 sm:gap-8">

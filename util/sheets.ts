@@ -31,3 +31,16 @@ export async function getEventsList(): Promise<Event[] | undefined> {
         }
     });
 }
+
+export type RallyCupClassStandings = {name: string, total: number, events: RallyCupEvent[]};
+type RallyCupEvent = {name: string, points: number}
+export async function getRallyCupStandings(): Promise<RallyCupClassStandings[]> {
+    // Dummy info; replace with spreadsheet fetching later.
+    const standings: RallyCupClassStandings[] = [
+        {name: '2023', total: 800, events: [{name: 'Rally A', points: 600}, {name: 'Rally B', points: 200}]},
+        {name: '2024', total: 500, events: [{name: 'Rally A', points: 200}, {name: 'Rally B', points: 300}]},
+        {name: '2025', total: 300, events: [{name: 'Rally A', points: 300}, {name: 'Rally B', points: 0}]},
+        {name: '2026', total: 200, events: [{name: 'Rally A', points: 100}, {name: 'Rally B', points: 100}]},
+    ];
+    return standings;
+}

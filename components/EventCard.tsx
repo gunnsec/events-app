@@ -1,6 +1,6 @@
 import {Fragment, useState} from 'react';
 import {Dialog, Transition} from '@headlessui/react';
-import {Event} from '../utils/sheets';
+import {Event} from '../util/sheets';
 
 
 export function EventCard(props: Event) {
