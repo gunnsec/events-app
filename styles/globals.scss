@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 #__next {
-    @apply h-full;
+    @apply flex-grow flex flex-col;
 }
 
 // Style overrides for the home page image marquee

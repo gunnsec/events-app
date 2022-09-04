@@ -10,7 +10,7 @@ class SECDocument extends Document {
                     <link rel="icon" href="https://www.gunnsec.org/uploads/1/2/3/2/123265564/graphiconly.png" />
                     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Limelight:300,400,500" />
                 </Head>
-                <body className="h-full dark:bg-midnight dark:text-white">
+                <body className="min-h-full dark:bg-midnight dark:text-white flex flex-col">
                     <Main />
                     <NextScript />
                 </body>
